@@ -44,7 +44,7 @@ function createDataBy(orderColumn){
         
     db.serialize(() => {
         var list = [];
-        db.each(`SELECT DISTINCT ` + orderColumn + ` FROM costs`, (err, row) => {
+        db.each(`SELECT DISTINCT ` + orderColumn + ` FROM costs ORDER BY ` + orderColumn, (err, row) => {//Alpharithmetical order
             if (err) {
                 console.error(err.message);
             }
@@ -63,7 +63,7 @@ function createDataBy(orderColumn){
 }
 
 function createFile(output, fileName){
-    var path = "./" + fileName + ".json";
+    var path = "./serverSide/Json/" + fileName + ".json";
     const fs = require('fs');
     const content = JSON.stringify(output);
     fs.writeFile(path, content, 'utf8', function (err) {

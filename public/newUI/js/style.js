@@ -1,13 +1,13 @@
 
-    // Get the modal
-    var modal = document.getElementById('cost');
-    
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
+// Get the modal
+var modal = document.getElementById('cost');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
     }
+}
 
 // open the map function
 function myMap() {
@@ -31,7 +31,7 @@ function myMap() {
 
 function searchingLocation() {
     var input, filter, ul, li, a, i;
-    input = document.getElementById("newSearchLocInput");
+    input = document.getElementById("locationSelection");
     filter = input.value.toUpperCase();
     ul = document.getElementById("myLocations");
     li = ul.getElementsByTagName("li");
@@ -49,25 +49,51 @@ function searchingLocation() {
 
 //_______________________Make Json Object from Users Input______________________________
 
+//Insert To Database
 function makeNewOutlay(){
-    var newamount = document.getElementById("newamount").value;
-    var newDate = document.getElementById("newDate").value;
-    var newDescription = document.getElementById("newDescription").value;
-    var newType = document.getElementById("newTypeSelection").value;
-    var newUserStatus = document.getElementById("newUserStatusSelection").value;
-    var newMoodLevel = document.getElementById("newMoodLevelSelection").value;
-    var newLocation = document.getElementById("newSearchLocInput").value;
+    const sqlite3 = require('sqlite3').verbose();
+    var amount = document.getElementById("amount").value;
+    var type = document.getElementById("typeSelection").value;
+    var date = document.getElementById("date").value;
+    var description = document.getElementById("description").value;
+    var userStatus = document.getElementById("userStatusSelection").value;
+    var moodLevel = document.getElementById("moodLevelSelection").value;
+    var weather = "NULL";
+    var location = document.getElementById("locationSelection").value;
+    var insertToTable = "INSERT INTO costs(amount, type, date, description, userStatus, moodLevel, weather, location) values(" +
+                            "'" + amount + 
+                            "', '" + type +
+                            "', '" + date + 
+                            "', '" + description + 
+                            "', '" + userStatus + 
+                            "', '" + moodLevel + 
+                            "', '" + weather + 
+                            "', '" + location + 
+                            "')";
+
+    // open database
+    let db = new sqlite3.Database('./Database/costs.sqlite', sqlite3.OPEN_READWRITE, (err) => {
+        if (err) {
+            return console.error(err.message);
+        }
+        console.log('Connected to the costs SQlite database.');
+    });
+        
+    db.serialize(() => {
+        db.each(insertToTable, (err, row) => {
+            if (err) {
+                console.error(err.message);
+            }
+        });
+    });
     
-    var JsonObj = {
-        amount: newamount,
-        date: newDate,
-        description: newDescription,
-        type: newType,
-        userStatus: newUserStatus,
-        moodLevel: newMoodLevel,
-        location: newLocation
-    }
-    console.log(JsonObj);
+    // close the database connection
+    db.close((err) => {
+        if (err) {
+            return console.error(err.message);
+        }
+        console.log('Close the database connection.');
+    });
 }
 
 //_________________________SELECT LOCATION__________________________
@@ -76,8 +102,29 @@ function getEventTarget(e) {
     return e.target || e.srcElement; 
 }
 
-var ul = document.getElementById('myLocations');
-function selectLocation(event) {
-    var target = getEventTarget(event);
-    document.getElementById("newSearchLocInput").value = target.innerHTML;
-};
+//That is for making selections by the Json files
+$.getJSON( "./../../serverSide/Json/columns.json", function( columns ) {
+    columns.forEach(col => {
+        var columnName = col;
+        var path = "./../../serverSide/Json/" + columnName + ".json";
+        $.getJSON( path, function( obj ) {
+            var id = columnName + "Selection";
+            obj.forEach(element => {
+                var x = document.getElementById(id);
+                if(id == "locationSelection"){
+                    var c = document.createElement("option");
+                    c.setAttribute("value", element);
+                    x.appendChild(c);
+                    console.log(element);
+                }
+                else if(x != null){
+                    var c = document.createElement("option");
+                    c.text = element;
+                    c.value = element;
+                    x.options.add(c, 1);
+                    console.log(element);
+                }
+            });
+        });
+    });
+    });

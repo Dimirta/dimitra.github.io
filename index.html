@@ -20,35 +20,6 @@
   <!--For Slider-->
   <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <!--for Calendar-->
-  <script src="columns.json"></script>
-  <script src="location.json"></script>
-  <script src="moodLevel.json"></script>
-  <script src="type.json"></script>
-  <script src="userStatus.json"></script>
-  <script>
-    //That is for making selections by the Json files
-    $.getJSON( "./columns.json", function( columns ) {
-        columns.forEach(col => {
-            var columnName = col;
-            var path = "./" + columnName + ".json";
-            $.getJSON( path, function( obj ) {
-                var id = columnName + "Selection";
-                obj.forEach(element => {
-                    var x = document.getElementById(id);
-                    if(x != null){
-                        var c = document.createElement("option");
-                        c.text = element;
-                        c.value = element;
-                        x.options.add(c, 1);
-                        console.log(element);
-                    }
-                });
-            });
-        });
-    });
-  </script>
-</head>
 <body>
   <div id="chartContainer" style="height: 500px; width: 100%;"></div>
   <div id="filtersContainer" style="position: relative;">
@@ -66,39 +37,23 @@
 
     <label>  Type</label>
     <select id="typeSelection">
-      <option value="null"></option>
     </select></br> 
 
 
     <label>  User Status</label>
     <select id="userStatusSelection">
-      <option value="null"></option>
     </select></br>
 
     <label>  Mood Level</label>
     <select id="moodLevelSelection">
-      <option value="null"></option>
     </select></br>
 
     <label>  Location</label>
     <select id="locationSelection">
-      <option value="null"></option>
     </select></br>
 
     <label>  Type Of Chart</label>
     <select id="typeOfChartSelection">
-      <option value="column">Column</option>
-      <option value="spline">Spline</option>
-      <option value="splineArea">SplineArea</option>
-      <option value="stepLine">StepLine</option>
-      <option value="scatter">Scatter</option>
-      <option value="bubble">Bubble</option>
-      <option value="doughnut">Doughnut</option>
-      <option value="bar">Bar</option>
-      <option value="area">Area</option>
-      <option value="line">Line</option>
-      <option value="pie">Pie</option>
-      <option value="pyramid">Pyramid</option>
     </select></br>
 
     <label for="description">  Description</label>

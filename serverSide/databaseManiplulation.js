@@ -3,18 +3,17 @@ const sqlite3 = require('sqlite3').verbose();
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 
-
 //Insert To Database
 function makeNewOutlay(){
     const sqlite3 = require('sqlite3').verbose();
-    var amount = document.getElementById("newamount").value;
-    var type = document.getElementById("newTypeSelection").value;
-    var date = document.getElementById("newDate").value;
-    var description = document.getElementById("newDescription").value;
-    var userStatus = document.getElementById("newUserStatusSelection").value;
-    var moodLevel = document.getElementById("newMoodLevelSelection").value;
+    var amount = document.getElementById("amount").value;
+    var type = document.getElementById("typeSelection").value;
+    var date = document.getElementById("date").value;
+    var description = document.getElementById("description").value;
+    var userStatus = document.getElementById("userStatusSelection").value;
+    var moodLevel = document.getElementById("moodLevelSelection").value;
     var weather = "NULL";
-    var location = document.getElementById("newSearchLocInput").value;
+    var location = document.getElementById("locationSelection").value;
     var insertToTable = "INSERT INTO costs(amount, type, date, description, userStatus, moodLevel, weather, location) values(" +
                             "'" + amount + 
                             "', '" + type +
@@ -25,7 +24,6 @@ function makeNewOutlay(){
                             "', '" + weather + 
                             "', '" + location + 
                             "')";
-
 
     // open database
     let db = new sqlite3.Database('./Database/costs.sqlite', sqlite3.OPEN_READWRITE, (err) => {
@@ -71,5 +69,4 @@ function applyFilters(amount, start, end){
         console.log(row.amount + "\t" + row.type + "\t" + row.date + "\t" + row.description + "\t" + row.userStatus + "\t" + row.moodLevel + "\t" + row.weather + "\t" + row.location);
         });
 */
-
 //#endregion
