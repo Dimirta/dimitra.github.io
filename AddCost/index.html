@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <title>New UI</title>
+    <title>Add new outlay!</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <script src="js/style.js" type="text/javascript"></script>
   </head>
 <body><h2>Cost review form</h2>
 
@@ -21,7 +20,7 @@
           <h4>Please fill in this form to add a cost in the database.</h4>
           <div class="firstContainer">
             <hr>
-            <!--_______________________________________amount OF COST____________________________________________-->
+            <!--_______________________________________AMOUNT OF COST____________________________________________-->
             <label for="cost"><b>Cost</b></label></br>
             <input id="amount" type="number" placeholder="Enter amount of cost" name="cost" min="0" step="1" required> €
             <hr>
@@ -69,13 +68,14 @@
     
           <div class="clearfix">
             <button type="button" onclick="document.getElementById('cost').style.display='none'" class="cancelbtn">Cancel</button>
-            <button type="button" onclick="makeNewOutlay()" class="signupbtn">Save cost</button>
+            <button type="button" class="savecost" >Save cost</button>
           </div>
         </div>
       </form>
     </div>
     
     <!---<script src="js/JSON/createJson.js" type="module"></script>-->
+    <script src="js/style.js" type="text/javascript"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1q0qzgnFzUufrSmYzeAVfOOA6IqjN6wY&callback=myMap"></script>
 </body>
 </html>

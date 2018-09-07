@@ -3,7 +3,7 @@ const sqlite3 = require('sqlite3').verbose();
 module.exports = {
     createJsonFiles : function(){
         // open database
-        let db = new sqlite3.Database('./Database/costs.sqlite', sqlite3.OPEN_READONLY, (err) => {
+        let db = new sqlite3.Database('./../Model/Database/costs.sqlite', sqlite3.OPEN_READONLY, (err) => {
             if (err) {
                 return console.error(err.message);
             }
@@ -16,9 +16,9 @@ module.exports = {
                 if (err) {
                     console.error(err.message);
                 }
-                createDataBy(row.name); //Create Json files with the name of column
+                createDataBy(row.name); //Create Json files with the name of columns.json
                 list.push(row.name);
-                createFile(list, 'columns'); //Create Json file whicj stores the files
+                createFile(list, 'columns'); //Create Json file which stores the files
             });
         });
 
@@ -35,7 +35,7 @@ module.exports = {
 function createDataBy(orderColumn){
     const sqlite3 = require('sqlite3').verbose();
     // open database
-    let db = new sqlite3.Database('./Database/costs.sqlite', sqlite3.OPEN_READONLY, (err) => {
+    let db = new sqlite3.Database('./../Model/Database/costs.sqlite', sqlite3.OPEN_READONLY, (err) => {
         if (err) {
             return console.error(err.message);
         }
@@ -63,7 +63,7 @@ function createDataBy(orderColumn){
 }
 
 function createFile(output, fileName){
-    var path = "./serverSide/Json/" + fileName + ".json";
+    var path = "/" + fileName + ".json";
     const fs = require('fs');
     const content = JSON.stringify(output);
     fs.writeFile(path, content, 'utf8', function (err) {

@@ -1,5 +1,3 @@
-
-// Get the modal
 var modal = document.getElementById('cost');
 
 // When the user clicks anywhere outside of the modal, close it
@@ -28,7 +26,6 @@ function myMap() {
     }
 }
 
-
 function searchingLocation() {
     var input, filter, ul, li, a, i;
     input = document.getElementById("locationSelection");
@@ -47,11 +44,9 @@ function searchingLocation() {
     }
 }
 
-//_______________________Make Json Object from Users Input______________________________
+//_______________________Insert to Database from Users Input______________________________
 
-//Insert To Database
 function makeNewOutlay(){
-    const sqlite3 = require('sqlite3').verbose();
     var amount = document.getElementById("amount").value;
     var type = document.getElementById("typeSelection").value;
     var date = document.getElementById("date").value;
@@ -60,40 +55,6 @@ function makeNewOutlay(){
     var moodLevel = document.getElementById("moodLevelSelection").value;
     var weather = "NULL";
     var location = document.getElementById("locationSelection").value;
-    var insertToTable = "INSERT INTO costs(amount, type, date, description, userStatus, moodLevel, weather, location) values(" +
-                            "'" + amount + 
-                            "', '" + type +
-                            "', '" + date + 
-                            "', '" + description + 
-                            "', '" + userStatus + 
-                            "', '" + moodLevel + 
-                            "', '" + weather + 
-                            "', '" + location + 
-                            "')";
-
-    // open database
-    let db = new sqlite3.Database('./Database/costs.sqlite', sqlite3.OPEN_READWRITE, (err) => {
-        if (err) {
-            return console.error(err.message);
-        }
-        console.log('Connected to the costs SQlite database.');
-    });
-        
-    db.serialize(() => {
-        db.each(insertToTable, (err, row) => {
-            if (err) {
-                console.error(err.message);
-            }
-        });
-    });
-    
-    // close the database connection
-    db.close((err) => {
-        if (err) {
-            return console.error(err.message);
-        }
-        console.log('Close the database connection.');
-    });
 }
 
 //_________________________SELECT LOCATION__________________________
@@ -103,10 +64,10 @@ function getEventTarget(e) {
 }
 
 //That is for making selections by the Json files
-$.getJSON( "./../../serverSide/Json/columns.json", function( columns ) {
+$.getJSON( "/Json/columns.json", function( columns ) {
     columns.forEach(col => {
         var columnName = col;
-        var path = "./../../serverSide/Json/" + columnName + ".json";
+        var path = "/Json/" + columnName + ".json";
         $.getJSON( path, function( obj ) {
             var id = columnName + "Selection";
             obj.forEach(element => {
@@ -127,4 +88,4 @@ $.getJSON( "./../../serverSide/Json/columns.json", function( columns ) {
             });
         });
     });
-    });
+});

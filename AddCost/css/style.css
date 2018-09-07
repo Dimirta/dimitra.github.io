@@ -67,7 +67,7 @@ button:hover {
   width: 50%;
 }
 
-.signupbtn {
+.savecost {
     background-color: rgb(255, 115, 0);
     border: 1px solid rgb(229, 255, 0);
 }
@@ -141,7 +141,6 @@ h1, h2, h3, h4, h5, h6 {
     clear: both;
     display: table;
 }
-
 
 /* Change styles for cancel button and signup button on extra small screens */
 @media screen and (max-width: 300px) {
