@@ -1,9 +1,9 @@
 //That is for making selections by the Json files
-$.getJSON( "./../Json/columns.json", function( columns ) {
+$.getJSON( "./Json/columns.json", function( columns ) {
     columns.forEach(columnName => {
         //don't get dublicated filters ToDo:: change it
         if(columnName !== "description" && columnName !== "date" && columnName !== "weather"){     
-            var path = "./../Json/" + columnName + ".json";
+            var path = "./Json/" + columnName + ".json";
             $.getJSON( path, function( obj ) {
                 var list = [];
                 obj.forEach(element => {
