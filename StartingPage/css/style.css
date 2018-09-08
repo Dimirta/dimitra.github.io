@@ -2,6 +2,7 @@
 
 #filtersContainer{
     position: relative;
+    width: 20%
 }
 
 #reportrange{
@@ -27,7 +28,7 @@
 #chartWrapper {
     position: absolute;
     right: 0;
-    width: 96%;
+    width: 80%;
     height: 90%;
     overflow-y: auto;
     
@@ -54,9 +55,8 @@
 }
 
 .sidebar label {
-    padding: 8px 8px 8px 32px;
     text-decoration: none;
-    font-size: 25px;
+    font-size: 13px;
     color: #f1f1f1;
     display: block;
     transition: 0.3s;
@@ -100,7 +100,7 @@
 /*Html basic objects style*/
 select{
     background-color: #4CAF50;
-    font-size: 15px;
+    font-size: 13px;
     width: 100%;
     padding: 15px;
     display: inline-block;
