@@ -2,19 +2,15 @@
 
 
 #chartContainer{
-    height: 800px; /*ToDo:: make this a parameter*/
-    width: 1600px; /*ToDo:: make this a parameter*/
-}
-
-#chartWrapper {
-    position: absolute;
-    right: 0;
-    width: 100%;
-    height: 90%;
-    overflow-y: auto;
-    
-}
-
+    display: block;
+    height: auto;
+    width: fit-content; /*ToDo:: make this a parameter*/
+  }
+  
+  .canvasjs-chart-canvas{
+    height: 100% !important;
+    position: inherit !important;
+  }
 #main {
     transition: margin-left .5s;
     padding: 16px;

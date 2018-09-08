@@ -11,15 +11,6 @@ ol,ul,li {
   padding: 0;
   border: 0;
 }
-#chartContainer{
-  display: block;
-  height: auto;
-}
-
-.canvasjs-chart-canvas{
-  height: 100% !important;
-  position: inherit !important;
-}
 
 @-webkit-viewport { width: device-width; }
 @-moz-viewport { width: device-width; }
