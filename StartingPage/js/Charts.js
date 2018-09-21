@@ -13,7 +13,6 @@ function showChart() {
          }
        ],
      });
-
     chartamount.render();
   }
 // functions that modify the spendingItems by the given filters
@@ -58,10 +57,10 @@ function contentFilters(){
   filter(function(s){if(locationFilter !== "null") {return s.location == locationFilter;} else {return true;}});
   
   //This is for creating inner Html for costs
-  var list = result.map(i => {
+  var amountlist = result.map(i => {
     return parseFloat(i[" amount "]);
   });
-  TotalCost(list);
+  TotalCost(amountlist);
 
   return result.map(i => {
     return {label: i.description, y: parseFloat(i[" amount "])};
@@ -77,9 +76,33 @@ function Refresh(){
   showChart();
 }
 
+//#region Column Filtering
+function columnFilters(){
+  var column = document.getElementById("columnsSelection").value;
+  const chartData = {};
+  $.getJSON("./Json/"+ column +".json", function(elements){
+    elements.forEach(element => {
+        var temp = spendingItems.filter(function(s){
+            return s[`${column}`] == element; //searching for costs that has this characteristic
+        });
+        var amount = temp.map(a => {
+            return parseFloat(a[" amount "]); //collect the list of amounts
+        });
+        chartData[element] = amount.reduce((a,b) => a + b, 0).toFixed(2); //push the sum of it to the name of...Element
+        var data = {};
+        for(var key in chartData){
+          data.label = key;
+          data.cost = chartData[key];
+        }
+        console.log(data);
+      });
+  });
+}
+//#endregion
+
 //#region total-cost-to-inner-html
 function TotalCost(amountList){
-  var sum = amountList.reduce((a,b) => a + b, 0);
+  var sum = amountList.reduce((a,b) => a + b, 0).toFixed(2);
 
   $('#totalCost').empty(); //clean the previous if exists!
   var myDiv = document.getElementById("totalCost");
