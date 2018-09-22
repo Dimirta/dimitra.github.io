@@ -37,7 +37,6 @@
         return this;
       };
     }
-    /* exported addEvent, removeEvent, getChildren, setAttributes, addClass, removeClass, forEach */
     
     /**
      * Add Event
