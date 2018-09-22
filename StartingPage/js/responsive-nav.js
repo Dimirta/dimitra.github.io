@@ -262,9 +262,6 @@
         }
       },
 
-      /**
-       * Toggles the navigation open/close
-       */
       toggle: function () {
         if (hasAnimFinished === true) {
           if (!navOpen) {
@@ -275,9 +272,6 @@
         }
       },
 
-      /**
-       * Opens the navigation
-       */
       open: function () {
         if (!navOpen) {
           removeClass(nav, "closed");
@@ -291,9 +285,6 @@
         }
       },
 
-      /**
-       * Closes the navigation
-       */
       close: function () {
         if (navOpen) {
           addClass(nav, "closed");
@@ -320,19 +311,13 @@
         }
       },
 
-      /**
-       * Resize is called on window resize and orientation change.
-       * It initializes the CSS styles and height calculations.
-       */
       resize: function () {
 
-        // Resize watches navigation toggle's display state
         if (window.getComputedStyle(navToggle, null).getPropertyValue("display") !== "none") {
 
           isMobile = true;
           setAttributes(navToggle, {"aria-hidden": "false"});
 
-          // If the navigation is hidden
           if (nav.className.match(/(^|\s)closed(\s|$)/)) {
             setAttributes(nav, {"aria-hidden": "true"});
             nav.style.position = "absolute";
@@ -383,9 +368,6 @@
         }
       },
 
-      /**
-       * Initializes the widget
-       */
       _init: function () {
         this.index = index++;
 
@@ -399,12 +381,6 @@
         this._createToggle();
         this._transitions();
         this.resize();
-
-        /**
-         * On IE8 the resize event triggers too early for some reason
-         * so it's called here again on init to make sure all the
-         * calculated styles are correct.
-         */
         var self = this;
         setTimeout(function () {
           self.resize();
