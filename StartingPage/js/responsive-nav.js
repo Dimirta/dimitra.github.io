@@ -470,14 +470,12 @@
           e.stopPropagation();
           return false;
 
-        // This is strictly for old IE
         } else {
           e.returnValue = false;
         }
       },
 
       /**
-       * On touch start we get the location of the touch.
        *
        * @param  {event} event
        */
@@ -489,15 +487,11 @@
         this.startY = e.touches[0].clientY;
         this.touchHasMoved = false;
 
-        /**
-         * Remove mouseup event completely here to avoid
-         * double triggering the event.
-         */
+        
         removeEvent(navToggle, "mouseup", this, false);
       },
 
       /**
-       * Check if the user is scrolling instead of tapping.
        *
        * @param  {event} event
        */
@@ -509,7 +503,6 @@
       },
 
       /**
-       * On touch end toggle the navigation.
        *
        * @param  {event} event
        */
@@ -518,20 +511,15 @@
         if (!isMobile) {
           return;
         }
-
-        // If the user isn't scrolling
         if (!this.touchHasMoved) {
 
-          // If the event type is touch
           if (e.type === "touchend") {
             this.toggle();
             return;
 
-          // Event type was click, not touch
           } else {
             var evt = e || window.event;
 
-            // If it isn't a right click, do toggling
             if (!(evt.which === 3 || evt.button === 2)) {
               this.toggle();
             }
@@ -567,10 +555,7 @@
         }
       },
 
-      /**
-       * Calculates the height of the navigation and then creates
-       * styles which are later added to the page <head>
-       */
+      
       _calcHeight: function () {
         var savedHeight = 0;
         for (var i = 0; i < nav.inner.length; i++) {
