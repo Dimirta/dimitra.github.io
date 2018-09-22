@@ -66,7 +66,6 @@
         } else if ("attachEvent" in el) {
           if (typeof fn === "object" && fn.handleEvent) {
             el.attachEvent("on" + evt, function () {
-              // Bind fn as this
               fn.handleEvent.call(fn);
             });
           } else {
@@ -117,9 +116,7 @@
         if (e.children.length < 1) {
           throw new Error("The Nav container has no containing elements");
         }
-        // Store all children in array
         var children = [];
-        // Loop through children and store in array if child != TextNode
         for (var i = 0; i < e.children.length; i++) {
           if (e.children[i].nodeType === 1) {
             children.push(e.children[i]);
@@ -205,8 +202,8 @@
           navActiveClass: "js-nav-active",  // String: Class that is added to <html> element when nav is active
           jsClass: "js",                    // String: 'JS enabled' class which is added to <html> element
           init: function(){},               // Function: Init callback
-          open: function(){},               // Function: Open callback
-          close: function(){}               // Function: Close callback
+          open: function(){},               
+          close: function(){}               
         };
 
         // User defined options
