@@ -201,43 +201,33 @@
           navClass: "nav-collapse",        
           navActiveClass: "js-nav-active", 
           jsClass: "js",                   
-          init: function(){},               // Function: Init callback
+          init: function(){}, 
           open: function(){},               
           close: function(){}               
         };
-
-        // User defined options
         for (i in options) {
           this.options[i] = options[i];
         }
 
-        // Adds "js" class for <html>
         addClass(htmlEl, this.options.jsClass);
 
-        // Wrapper
         this.wrapperEl = el.replace("#", "");
 
-        // Try selecting ID first
         if (document.getElementById(this.wrapperEl)) {
           this.wrapper = document.getElementById(this.wrapperEl);
 
-        // If element with an ID doesn't exist, use querySelector
         } else if (document.querySelector(this.wrapperEl)) {
           this.wrapper = document.querySelector(this.wrapperEl);
 
-        // If element doesn't exists, stop here.
         } else {
           throw new Error("The nav element you are trying to select doesn't exist");
         }
 
-        // Inner wrapper
         this.wrapper.inner = getChildren(this.wrapper);
 
-        // For minification
         opts = this.options;
         nav = this.wrapper;
 
-        // Init
         this._init(this);
       };
 
