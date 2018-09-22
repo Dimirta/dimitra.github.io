@@ -37,3 +37,4 @@ function makeSelection(input, optionList){
         newSelection.appendChild(option);
     });
 }
+
