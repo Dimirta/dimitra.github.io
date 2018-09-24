@@ -336,9 +336,8 @@
       },
 
       /**
-       *
        * @param  {event} event
-       * @return {type} returns the type of event that should be used
+       * @return {type}
        */
       handleEvent: function (e) {
         var evt = e || window.event;
