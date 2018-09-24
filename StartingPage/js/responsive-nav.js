@@ -187,7 +187,6 @@
         var i;
 
         /**
-         * Default options
          * @type {Object}
          */
         this.options = {
