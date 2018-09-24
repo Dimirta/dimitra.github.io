@@ -457,7 +457,6 @@
       },
 
       /**
-       * Prevents the default functionality.
        *
        * @param  {event} event
        */
