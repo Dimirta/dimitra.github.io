@@ -107,10 +107,8 @@
       },
     
       /**
-       * Get the children of any element
-       *
        * @param  {element}
-       * @return {array} Returns matching elements in an array
+       * @return {array}
        */
       getChildren = function (e) {
         if (e.children.length < 1) {
@@ -126,8 +124,6 @@
       },
     
       /**
-       * Sets multiple attributes at once
-       *
        * @param {element} element
        * @param {attrs}   attrs
        */
@@ -138,8 +134,6 @@
       },
     
       /**
-       * Adds a class to any element
-       *
        * @param {element} element
        * @param {string}  class
        */
@@ -151,8 +145,6 @@
       },
     
       /**
-       * Remove a class from any element
-       *
        * @param  {element} element
        * @param  {string}  class
        */
@@ -162,8 +154,6 @@
       },
     
       /**
-       * forEach method that passes back the stuff we need
-       *
        * @param  {array}    array
        * @param  {Function} callback
        * @param  {scope}    scope
