@@ -575,7 +575,6 @@
 
     };
     return new ResponsiveNav(el, options);
-
   };
 
   if (typeof module !== "undefined" && module.exports) {
