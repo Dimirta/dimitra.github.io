@@ -336,7 +336,6 @@
       },
 
       /**
-       * Takes care of all even handling
        *
        * @param  {event} event
        * @return {type} returns the type of event that should be used
@@ -367,7 +366,6 @@
           break;
         }
       },
-
       _init: function () {
         this.index = index++;
 
@@ -397,20 +395,17 @@
 
         opts.init();
       },
-
       _createStyles: function () {
         if (!styleElement.parentNode) {
           styleElement.type = "text/css";
           document.getElementsByTagName("head")[0].appendChild(styleElement);
         }
       },
-
       _removeStyles: function () {
         if (styleElement.parentNode) {
           styleElement.parentNode.removeChild(styleElement);
         }
       },
-
       _createToggle: function () {
 
         if (!opts.customToggle) {
