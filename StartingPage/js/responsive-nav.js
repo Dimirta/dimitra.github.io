@@ -232,10 +232,6 @@
       };
 
     ResponsiveNav.prototype = {
-
-      /**
-       * Unattaches events and removes any classes that were added
-       */
       destroy: function () {
         this._removeStyles();
         removeClass(nav, "closed");
@@ -300,8 +296,6 @@
               nav.style.position = "absolute";
               hasAnimFinished = true;
             }, opts.transition + 10);
-
-          // Animations aren't enabled, we can do these immediately
           } else {
             nav.style.position = "absolute";
           }
