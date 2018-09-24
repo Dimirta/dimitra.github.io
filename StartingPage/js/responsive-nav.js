@@ -555,13 +555,11 @@
         }
       },
 
-      
       _calcHeight: function () {
         var savedHeight = 0;
         for (var i = 0; i < nav.inner.length; i++) {
           savedHeight += nav.inner[i].offsetHeight;
         }
-
         var innerStyles = "." + opts.jsClass + " ." + opts.navClass + "-" + this.index + ".opened{max-height:" + savedHeight + "px !important} ." + opts.jsClass + " ." + opts.navClass + "-" + this.index + ".opened.dropdown-active {max-height:9999px !important}";
 
         if (styleElement.styleSheet) {
@@ -582,5 +580,4 @@
   } else {
     window.responsiveNav = responsiveNav;
   }
-
 }(document, window, 0));
