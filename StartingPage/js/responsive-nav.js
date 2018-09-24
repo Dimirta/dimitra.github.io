@@ -539,10 +539,6 @@
           this.toggle();
         }
       },
-
-      /**
-       * Adds the needed CSS transitions if animations are enabled
-       */
       _transitions: function () {
         if (opts.animate) {
           var objStyle = nav.style,
