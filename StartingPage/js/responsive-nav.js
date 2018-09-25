@@ -24,10 +24,6 @@
     }
     
     /**
-     * Add Event
-     * fn arg can be an object or a function, thanks to handleEvent
-     * read more at: http://www.thecssninja.com/javascript/handleevent
-     *
      * @param  {element}  element
      * @param  {event}    event
      * @param  {Function} fn
