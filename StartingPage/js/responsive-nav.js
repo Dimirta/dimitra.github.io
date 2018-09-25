@@ -225,7 +225,6 @@
           navToggle.removeAttribute("aria-hidden");
         }
       },
-
       toggle: function () {
         if (hasAnimFinished === true) {
           if (!navOpen) {
@@ -235,7 +234,6 @@
           }
         }
       },
-
       open: function () {
         if (!navOpen) {
           removeClass(nav, "closed");
@@ -248,7 +246,6 @@
           opts.open();
         }
       },
-
       close: function () {
         if (navOpen) {
           addClass(nav, "closed");
@@ -256,8 +253,6 @@
           removeClass(htmlEl, opts.navActiveClass);
           removeClass(navToggle, "active");
           setAttributes(nav, {"aria-hidden": "true"});
-
-          // If animations are enabled, wait until they finish
           if (opts.animate) {
             hasAnimFinished = false;
             setTimeout(function () {
@@ -272,19 +267,14 @@
           opts.close();
         }
       },
-
       resize: function () {
-
         if (window.getComputedStyle(navToggle, null).getPropertyValue("display") !== "none") {
-
           isMobile = true;
           setAttributes(navToggle, {"aria-hidden": "false"});
-
           if (nav.className.match(/(^|\s)closed(\s|$)/)) {
             setAttributes(nav, {"aria-hidden": "true"});
             nav.style.position = "absolute";
           }
-
           this._createStyles();
           this._calcHeight();
         } else {
