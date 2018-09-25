@@ -387,7 +387,6 @@
           }
         }
       },
-
       _closeOnNavClick: function () {
         if (opts.closeOnNavClick) {
           var links = nav.getElementsByTagName("a"),
@@ -401,9 +400,7 @@
           });
         }
       },
-
       /**
-       *
        * @param  {event} event
        */
       _preventDefault: function(e) {
@@ -419,9 +416,7 @@
           e.returnValue = false;
         }
       },
-
       /**
-       *
        * @param  {event} event
        */
       _onTouchStart: function (e) {
