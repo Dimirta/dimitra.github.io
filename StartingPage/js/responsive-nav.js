@@ -441,9 +441,7 @@
           this.touchHasMoved = true;
         }
       },
-
       /**
-       *
        * @param  {event} event
        */
       _onTouchEnd: function (e) {
@@ -466,11 +464,7 @@
           }
         }
       },
-
       /**
-       * For keyboard accessibility, toggle the navigation on Enter
-       * keypress too.
-       *
        * @param  {event} event
        */
       _onKeyUp: function (e) {
