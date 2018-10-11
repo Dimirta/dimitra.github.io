@@ -6,8 +6,7 @@ function showChart() {
         text: "amount of money has been spend"              
       },
       data: [//array of dataSeries              
-        { //dataSeries object
-          //ToDo:: put the dates as labels
+        {
          type: chartFilters(),
          dataPoints : contentFilters()
          }
