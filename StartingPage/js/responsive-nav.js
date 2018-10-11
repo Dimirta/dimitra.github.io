@@ -471,8 +471,6 @@
       },
 
       /**
-       * On touch end toggle the navigation.
-       *
        * @param  {event} event
        */
       _onTouchEnd: function (e) {
