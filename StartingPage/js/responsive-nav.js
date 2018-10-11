@@ -429,7 +429,6 @@
       },
 
       /** 
-       *
        * @param  {event} event
        */
       _preventDefault: function(e) {
