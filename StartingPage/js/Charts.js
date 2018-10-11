@@ -5,7 +5,7 @@ function showChart() {
       title:{
         text: "amount of money has been spend"              
       },
-      data: [//array of dataSeries              
+      data: [        
         {
          type: chartFilters(),
          dataPoints : contentFilters()
