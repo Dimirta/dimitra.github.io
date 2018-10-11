@@ -268,7 +268,6 @@
           removeClass(navToggle, "active");
           setAttributes(nav, {"aria-hidden": "true"});
 
-          // If animations are enabled, wait until they finish
           if (opts.animate) {
             hasAnimFinished = false;
             setTimeout(function () {
