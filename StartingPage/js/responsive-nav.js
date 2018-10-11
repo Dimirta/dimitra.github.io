@@ -59,7 +59,6 @@
       },
     
       /**
-       *
        * @param  {element}  element
        * @param  {event}    event
        * @param  {Function} fn
@@ -90,7 +89,6 @@
       },
     
       /**
-       *
        * @param  {element}
        * @return {array}
        */
@@ -107,9 +105,7 @@
         return children;
       },
     
-      /**
-       *
-       * @param {element} element
+      /**       * @param {element} element
        * @param {attrs}   attrs
        */
       setAttributes = function (el, attrs) {
