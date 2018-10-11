@@ -310,7 +310,6 @@
       },
 
       /**
-       *
        * @param  {event} event
        * @return {type} 
        */
