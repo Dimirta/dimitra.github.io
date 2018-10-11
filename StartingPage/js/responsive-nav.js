@@ -1,9 +1,13 @@
+
+/* global Event */
 (function (document, window, index) {
+
   "use strict";
 
   var responsiveNav = function (el, options) {
 
     var computed = !!window.getComputedStyle;
+    
     if (!computed) {
       window.getComputedStyle = function(el) {
         this.el = el;
@@ -45,6 +49,7 @@
         } else if ("attachEvent" in el) {
           if (typeof fn === "object" && fn.handleEvent) {
             el.attachEvent("on" + evt, function () {
+              // Bind fn as this
               fn.handleEvent.call(fn);
             });
           } else {
@@ -54,7 +59,6 @@
       },
     
       /**
-       * Remove Event
        *
        * @param  {element}  element
        * @param  {event}    event
@@ -86,6 +90,7 @@
       },
     
       /**
+       *
        * @param  {element}
        * @return {array}
        */
@@ -103,6 +108,7 @@
       },
     
       /**
+       *
        * @param {element} element
        * @param {attrs}   attrs
        */
@@ -113,6 +119,7 @@
       },
     
       /**
+       *
        * @param {element} element
        * @param {string}  class
        */
@@ -124,6 +131,7 @@
       },
     
       /**
+       *
        * @param  {element} element
        * @param  {string}  class
        */
@@ -133,6 +141,7 @@
       },
     
       /**
+       *
        * @param  {array}    array
        * @param  {Function} callback
        * @param  {scope}    scope
@@ -156,23 +165,25 @@
         var i;
 
         /**
+         * Default options
          * @type {Object}
          */
         this.options = {
-          animate: true,                    
-          transition: 284,                  
-          label: "Menu",                    
-          insert: "before",                 
-          customToggle: "",                
-          closeOnNavClick: false,          
-          openPos: "relative",             
-          navClass: "nav-collapse",        
-          navActiveClass: "js-nav-active", 
-          jsClass: "js",                   
-          init: function(){}, 
-          open: function(){},               
-          close: function(){}               
+          animate: true,                    // Boolean: Use CSS3 transitions, true or false
+          transition: 284,                  // Integer: Speed of the transition, in milliseconds
+          label: "Menu",                    // String: Label for the navigation toggle
+          insert: "before",                 // String: Insert the toggle before or after the navigation
+          customToggle: "",                 // Selector: Specify the ID of a custom toggle
+          closeOnNavClick: false,           // Boolean: Close the navigation when one of the links are clicked
+          openPos: "relative",              // String: Position of the opened nav, relative or static
+          navClass: "nav-collapse",         // String: Default CSS class. If changed, you need to edit the CSS too!
+          navActiveClass: "js-nav-active",  // String: Class that is added to <html> element when nav is active
+          jsClass: "js",                    // String: 'JS enabled' class which is added to <html> element
+          init: function(){},               // Function: Init callback
+          open: function(){},               // Function: Open callback
+          close: function(){}               // Function: Close callback
         };
+
         for (i in options) {
           this.options[i] = options[i];
         }
@@ -200,6 +211,8 @@
       };
 
     ResponsiveNav.prototype = {
+
+      
       destroy: function () {
         this._removeStyles();
         removeClass(nav, "closed");
@@ -225,6 +238,7 @@
           navToggle.removeAttribute("aria-hidden");
         }
       },
+
       toggle: function () {
         if (hasAnimFinished === true) {
           if (!navOpen) {
@@ -253,12 +267,15 @@
           removeClass(htmlEl, opts.navActiveClass);
           removeClass(navToggle, "active");
           setAttributes(nav, {"aria-hidden": "true"});
+
+          // If animations are enabled, wait until they finish
           if (opts.animate) {
             hasAnimFinished = false;
             setTimeout(function () {
               nav.style.position = "absolute";
               hasAnimFinished = true;
             }, opts.transition + 10);
+
           } else {
             nav.style.position = "absolute";
           }
@@ -267,14 +284,19 @@
           opts.close();
         }
       },
+
       resize: function () {
+
         if (window.getComputedStyle(navToggle, null).getPropertyValue("display") !== "none") {
+
           isMobile = true;
           setAttributes(navToggle, {"aria-hidden": "false"});
+
           if (nav.className.match(/(^|\s)closed(\s|$)/)) {
             setAttributes(nav, {"aria-hidden": "true"});
             nav.style.position = "absolute";
           }
+
           this._createStyles();
           this._calcHeight();
         } else {
@@ -288,8 +310,9 @@
       },
 
       /**
+       *
        * @param  {event} event
-       * @return {type}
+       * @return {type} 
        */
       handleEvent: function (e) {
         var evt = e || window.event;
@@ -346,17 +369,20 @@
 
         opts.init();
       },
+
       _createStyles: function () {
         if (!styleElement.parentNode) {
           styleElement.type = "text/css";
           document.getElementsByTagName("head")[0].appendChild(styleElement);
         }
       },
+
       _removeStyles: function () {
         if (styleElement.parentNode) {
           styleElement.parentNode.removeChild(styleElement);
         }
       },
+
       _createToggle: function () {
 
         if (!opts.customToggle) {
@@ -387,6 +413,7 @@
           }
         }
       },
+ 
       _closeOnNavClick: function () {
         if (opts.closeOnNavClick) {
           var links = nav.getElementsByTagName("a"),
@@ -400,7 +427,9 @@
           });
         }
       },
-      /**
+
+      /** 
+       *
        * @param  {event} event
        */
       _preventDefault: function(e) {
@@ -416,6 +445,7 @@
           e.returnValue = false;
         }
       },
+
       /**
        * @param  {event} event
        */
@@ -426,13 +456,11 @@
         this.startX = e.touches[0].clientX;
         this.startY = e.touches[0].clientY;
         this.touchHasMoved = false;
-
-        
+ 
         removeEvent(navToggle, "mouseup", this, false);
       },
 
-      /**
-       *
+      /** 
        * @param  {event} event
        */
       _onTouchMove: function (e) {
@@ -441,7 +469,10 @@
           this.touchHasMoved = true;
         }
       },
+
       /**
+       * On touch end toggle the navigation.
+       *
        * @param  {event} event
        */
       _onTouchEnd: function (e) {
@@ -449,6 +480,7 @@
         if (!isMobile) {
           return;
         }
+
         if (!this.touchHasMoved) {
 
           if (e.type === "touchend") {
@@ -464,7 +496,9 @@
           }
         }
       },
+
       /**
+       *
        * @param  {event} event
        */
       _onKeyUp: function (e) {
@@ -473,6 +507,7 @@
           this.toggle();
         }
       },
+
       _transitions: function () {
         if (opts.animate) {
           var objStyle = nav.style,
@@ -490,6 +525,7 @@
         for (var i = 0; i < nav.inner.length; i++) {
           savedHeight += nav.inner[i].offsetHeight;
         }
+
         var innerStyles = "." + opts.jsClass + " ." + opts.navClass + "-" + this.index + ".opened{max-height:" + savedHeight + "px !important} ." + opts.jsClass + " ." + opts.navClass + "-" + this.index + ".opened.dropdown-active {max-height:9999px !important}";
 
         if (styleElement.styleSheet) {
@@ -502,7 +538,9 @@
       }
 
     };
+
     return new ResponsiveNav(el, options);
+
   };
 
   if (typeof module !== "undefined" && module.exports) {
@@ -510,4 +548,5 @@
   } else {
     window.responsiveNav = responsiveNav;
   }
+
 }(document, window, 0));
