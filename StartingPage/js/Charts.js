@@ -6,17 +6,10 @@ function showChart(chartDataPoints, chartTitle) {
       title:{
         text: chartTitle   
       },
-<<<<<<< HEAD
       data: [             
         {
          type: document.getElementById("typeOfChartSelection").value,
          dataPoints : chartDataPoints
-=======
-      data: [        
-        {
-         type: document.getElementById("typeOfChartSelection").value,
-         dataPoints : contentFilters()
->>>>>>> dfa1e08e3936e07969cc67b99492ca4a2681070a
          }
        ],
      });
@@ -75,13 +68,7 @@ function contentFilters(){
     return {label: i.description, y: parseFloat(i[" amount "])};
   });
 
-<<<<<<< HEAD
   showChart(filtersChartValues, "amount of money has been spend");
-=======
-
-function Refresh(){
-  showChart();
->>>>>>> dfa1e08e3936e07969cc67b99492ca4a2681070a
 }
 //#endregion
 
