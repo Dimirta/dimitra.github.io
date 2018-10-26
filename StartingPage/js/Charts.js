@@ -1,4 +1,4 @@
-let spendingItems, startDate, endDate, startAmount, endAmount;
+let spendingItems, startDate, endDate, startAmount, endAmount, excelColumns;
 
 //#region Display Charts
 function showChart(chartDataPoints, chartTitle) {
@@ -20,52 +20,45 @@ function showChart(chartDataPoints, chartTitle) {
 // functions that modify the spendingItems by the given filters
 //#region Filtering
 function contentFilters(){
+
+  var nonStaticResult = spendingItems; //filters that are non static, Everything except "amount", "date", "description"
+  excelColumns.forEach(function(column){
+    nonStaticResult = nonStaticResult.filter(function(s){
+        if(document.getElementById(`${column}Selection`).value !== "null"){
+          return s[`${column}`] == document.getElementById(`${column}Selection`).value;
+        }else{
+          return true;
+        }
+    });
+  });
+
   //declare values
   startAmount = $( "#slider-range" ).slider( "values", 0 );
   endAmount = $( "#slider-range" ).slider( "values", 1 );
   
-  var typeFilter = document.getElementById("typeSelection").value;
-  var dateFilter = document.getElementById("dateCheckbox").checked;
-  var descriptionFilter = document.getElementById("searchDescriptionInput").value;
-  var userStatusFilter = document.getElementById("userStatusSelection").value;
-  var moodLevelFilter = document.getElementById("moodLevelSelection").value;
-  var locationFilter = document.getElementById("locationSelection").value;
-  
-  const result =  spendingItems.
-  filter(function(s){//Cost Amount filter
-    var cost = parseFloat(s[" amount "]);
-    return (parseFloat(startAmount) <= cost && cost <= parseFloat(endAmount));
-  }).
-  filter(function(s){if(typeFilter !== "null") {return s.type == typeFilter;} else {return true;}}).
+  const result =  nonStaticResult.
+  filter(function(s){return (parseFloat(startAmount) <= parseFloat(s["amount"]) && parseFloat(s["amount"]) <= parseFloat(endAmount));}).//Cost Amount filter
+  filter(function(s){return String(s.description).includes(document.getElementById("searchDescriptionInput").value);}).
   filter(function(s){
-    if(dateFilter) {
-      //creating the cost date as date time
+    if(document.getElementById("dateCheckbox").checked) {//creating the cost date as date time
       var costDate_array = String(s.date).split('/');
-      var costDate = new Date("20" + costDate_array[2], costDate_array[0] - 1, costDate_array[1]);
-      //creating the filter date as date time (Start Date)
+      var costDate = new Date("20" + costDate_array[2], costDate_array[0] - 1, costDate_array[1]);//creating the filter date as date time (Start Date)
       var filterStartDate_array = startDate.format('YYYY-MM-DD').split('-');
-      var filterStartDate = new Date(filterStartDate_array[0], filterStartDate_array[1] - 1, filterStartDate_array[2]);
-      //creating the filter date as date time (End Date)
+      var filterStartDate = new Date(filterStartDate_array[0], filterStartDate_array[1] - 1, filterStartDate_array[2]);//creating the filter date as date time (End Date)
       var filterEndDate_array = endDate.format('YYYY-MM-DD').split('-');
       var filterEndDate = new Date(filterEndDate_array[0], filterEndDate_array[1] - 1, filterEndDate_array[2]);
       return ((+filterStartDate.getTime() <= +costDate.getTime()) && (+costDate.getTime() <= +filterEndDate.getTime()));
     }
     else {
       return true;
-    }}).
-  filter(function(s){return String(s.description).includes(descriptionFilter);}).
-  filter(function(s){if(userStatusFilter !== "null") {return s.userStatus == userStatusFilter;} else {return true;}}).
-  filter(function(s){if(moodLevelFilter !== "null") {return s.moodLevel == moodLevelFilter;} else {return true;}}).
-  filter(function(s){if(locationFilter !== "null") {return s.location == locationFilter;} else {return true;}});
+    }});
   
   //This is for creating inner Html for costs
-  var amountlist = result.map(i => {
-    return parseFloat(i[" amount "]);
-  });
-  TotalCost(amountlist);
+  var amountlist = result.map(i => { return parseFloat(i["amount"]); });
+  TotalCost(amountlist); //to display the total cost down below the filters
 
   var filtersChartValues =  result.map(i => {
-    return {label: i.description, y: parseFloat(i[" amount "])};
+    return {label: i.description, y: parseFloat(i["amount"])};
   });
 
   showChart(filtersChartValues, "amount of money has been spend");
@@ -74,17 +67,17 @@ function contentFilters(){
 
 //#region Column Filtering
 function columnFilters(){
-  var column = document.getElementById("columnsSelection").value;
 
+  var column = document.getElementById("columnsSelection").value;
   var uniqueValues = [];
-  var dataDictionary = {};
+  var dataDictionary = {}; //Dictionary that display chart values
   for(let i = 0; i<spendingItems.length; i++){
     if(uniqueValues.indexOf(spendingItems[i][`${column}`]) === -1){ //if is unique!
       uniqueValues.push(spendingItems[i][`${column}`]);
       dataDictionary[`${spendingItems[i][`${column}`]}`] = 0.0; //put a starting value 
     }
-    if(spendingItems[i][" amount "] !== "null"){
-      dataDictionary[`${spendingItems[i][`${column}`]}`] += parseFloat(spendingItems[i][" amount "]);
+    if(spendingItems[i]["amount"] !== "null"){
+      dataDictionary[`${spendingItems[i][`${column}`]}`] += parseFloat(spendingItems[i]["amount"]);
     }
   }
 
@@ -104,11 +97,21 @@ function columnFilters(){
 function TotalCost(amountList){
   var sum = amountList.reduce((a,b) => a + b, 0).toFixed(2);
 
+  if(amountList.length > 0){
+    var average = sum/amountList.length;
+  }else{
+    var average = 0;
+  }
+
   $('#totalCost').empty(); //clean the previous if exists!
   var myDiv = document.getElementById("totalCost");
-  var h2 = document.createElement("h2");
-  h2.textContent = "Total cost: " + sum.toString();
-  myDiv.appendChild(h2);
+  var h2Total = document.createElement("h2");
+  h2Total.textContent = "Total cost: " + sum.toString();
+  myDiv.appendChild(h2Total);
+  myDiv.appendChild(document.createElement("br"));
+  var h2Average = document.createElement("h2");
+  h2Average.textContent = "Average: " + average.toString();
+  myDiv.appendChild(h2Average);
 }
 //#endregion
 
@@ -130,11 +133,11 @@ function filePicked(oEvent) {
   reader.onload = function(e) {
     var data = e.target.result;
     var cfb = XLSX.read(data, {type: 'binary'});
-    console.log(cfb)
     cfb.SheetNames.forEach(function(sheetName) {
       spendingItems = XLS.utils.sheet_to_json(cfb.Sheets[sheetName]);   
       console.log(spendingItems);
-      createHTML();
+      createHTML()
+      foo.createHTML();
     });
   };
   // Tell JS To Start Reading The File.. You could delay this if desired
@@ -142,67 +145,24 @@ function filePicked(oEvent) {
 }
 //#endregion
 
-//#region Calendar
-$(function() {
-  var start = moment().subtract(29, 'days');
-  var end = moment();
-
-  function cb(start, end) {
-      $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-      startDate = start;
-      endDate = end;
-  }
-  $('#reportrange').daterangepicker({
-      startDate: start,
-      endDate: end,
-      ranges: {
-         'Today': [moment(), moment()],
-         'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-         'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-         'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-         'This Month': [moment().startOf('month'), moment().endOf('month')],
-         'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-      }
-  }, cb);
-  cb(start, end);
-});
-//#endregion
-
-//#region Slider
-$( function() {
-  $( "#slider-range" ).slider({
-    range: true,
-    min: 0,
-    max: 500,
-    values: [ 0, 500 ],
-    slide: function( event, ui ) {
-      $( "#amountRange" ).val( "€" + ui.values[ 0 ] + " - €" + ui.values[ 1 ] );
-    }
-  });
-  $( "#amountRange" ).val( "€" + $( "#slider-range" ).slider( "values", 0 ) +
-    " - €" + $( "#slider-range" ).slider( "values", 1 ) );
-});
-//#endregion
-
 //#region selections filters innnerHtml
 function createHTML(){
     var uniqueValues = [];
-    var columns = [];
+    excelColumns = [];
     for(var key in spendingItems[0]){
       for(var i = 0; i<spendingItems.length; i++){
         if(uniqueValues.indexOf(spendingItems[i][`${key}`]) === -1){
           uniqueValues.push(spendingItems[i][`${key}`]);
         }
       }
-      console.log(uniqueValues);
-      if(key !== 'date' && key !== ' amount ' && key !== 'weather' && key !== 'description'){
+      if(key !== 'date' && key !== 'amount' && key !== 'weather' && key !== 'description'){
         makeSelection(key, uniqueValues, "autoGenerated");
+        excelColumns.push(key);
       }
-      columns.push(key);
+      //ToDo:: Store unique values
       uniqueValues = [];
     }
-    console.log(columns);
-    makeSelection("columns", columns, "columnFilters");
+    makeSelection("columns", excelColumns, "columnFilters");
 }
 
 function makeSelection(input, optionList, divId){
