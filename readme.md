@@ -1,4 +1,4 @@
-// Template Name: Famie - Farm Services &amp; Recycled elements Store Template
+// Template Name: Famie - FunritureServices &amp; Recycled elements Store Template
 // Template Author: Colorlib
 // Template Author URI: http://colorlib.com
 
