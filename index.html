@@ -3,8 +3,9 @@
 <head lang="en">
   <meta charset="UTF-8">
   <title>Molecule in Chem Viewer Demo</title>
-
-	<link rel="stylesheet" type="text/css" href="../css/kekule.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="/css/kekule.css" />
+	<link rel="stylesheet" type="text/css" href="/css/style.css" />
   <style>
     #listMol2D, #listMol3D
     {
@@ -164,10 +165,17 @@
   </script>
 </head>
 <body onload="init()">
-  <h2>Κύριε Τσάκωνα απομόνωσα την 3D αναπαράσταση για να την δείτε! 
-    Επίσης καταφερα να βάλω και την 2D!
-  </h2>
+  <div class="topnav">
+    <a href="/periodicTable.html">Periodic Table</a>
+    <a href="/reactionExercise.html">Reaction Exercise</a>
+    <a class="active" href="/index.html">2D and 3D molecule view</a>
+  </div>
+  <div class="Intro">
+    <h2>Displaying 2D or 3D Molecules in Chem Viewer</h2>
+    Select molecule in the drop-down list, or load local files by the "Load Data" button in viewer.
+  </div>
   <fieldset id="stage2D">
+    <legend>2D</legend>
     <select id="listMol2D"></select>
     <div id="chemViewer2D"
          data-widget="Kekule.ChemWidget.Viewer2D" data-enable-toolbar="true" data-auto-size="false" data-padding="20"
@@ -180,7 +188,5 @@
          data-widget="Kekule.ChemWidget.Viewer3D" data-enable-toolbar="true" data-auto-size="false" data-padding="20"
          data-chem-obj="url(#methane3D)"></div>
   </fieldset>
-
-
 </body>
 </html>
