@@ -21,3 +21,36 @@
     background-color: #4CAF50;
     color: white;
   }
+
+  #listMol2D, #listMol3D
+    {
+      display: block;
+    }
+    #stage2D, #stage3D
+    {
+      float: left;
+    }
+    #chemViewer2D, #chemViewer3D
+    {
+      width: 500px;
+      height: 400px;
+      border: 1px solid #ccc;
+    }
+    .ExtraMol
+    {
+      width: 300px;
+      height: 200px;
+    }
+    p
+    {
+      margin: 0.3em 0;
+    }
+    h2
+    {
+      clear: both;
+    }
+    .Intro
+    {
+      clear: both;
+      padding: 0.5em;
+    }
