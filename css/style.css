@@ -54,3 +54,67 @@
       clear: both;
       padding: 0.5em;
     }
+
+    fieldset p
+		{
+			margin: 0.8em auto;
+			padding: 0;
+		}
+		.K-CheckBox
+		{
+			width: 20em;
+			white-space: nowrap;
+    }
+    
+    body
+    {
+      font-family: 'Lucida Grande', 'Lucida Sans Unicode', arial, sans-serif;
+    }
+    #tableReaction,#tableReaction td
+    {
+      border: none;
+      border-collapse: collapse;
+      padding: 1em 0.2em;
+    }
+    #tableReaction, #tableReaction td, #tableReaction .K-Chem-Viewer
+    {
+      vertical-align: middle;
+    }
+    #tableReaction .ColReaction
+    {
+      text-align: right;
+    }
+    #tableReaction .ColProduct
+    {
+      text-align: left;
+    }
+    #tableReaction .ColResult
+    {
+      text-align: left;
+    }
+    .Product
+    {
+      width: 200px;
+      height: 100px;
+      border: 2px dashed #ccc;
+    }
+    .Key
+    {
+        border: 2px dotted #ff0000;
+        visibility: hidden;
+    }
+
+    .ResultMark
+    {
+      width: 48px;
+      height: 48px;
+      background-repeat: no-repeat;
+    }
+    .Correct
+    {
+      background-image: url(/styles/images/good.png);
+    }
+    .Wrong
+    {
+      background-image: url(/styles/images/error.png);
+    }

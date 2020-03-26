@@ -62,3 +62,11 @@ var mol2Ds = [];
       initMolList(false);
       initMolList(true);
     }
+
+  //   $(document).ready(function () {
+
+  //     $('#sidebarCollapse').on('click', function () {
+  //         $('#sidebar').toggleClass('active');
+  //     });
+  
+  // });
