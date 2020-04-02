@@ -64,12 +64,18 @@
     <script id="product5" type="chemical/x-kekule-json">
         {"id":"m6","renderOptions":{"expanded":true,"__type__":"object"},"charge":0,"parity":null,"ctab":{"nodes":[{"__type__":"Kekule.Atom","id":"a12","overrideRenderOptionItems":[],"coord2D":{"x":12.788622070312497,"y":36.45850912511088,"__type__":"object"},"charge":0,"parity":null,"isotopeId":"C"},{"__type__":"Kekule.Atom","id":"a13","overrideRenderOptionItems":[],"coord2D":{"x":13.1886220703125,"y":35.765688802083325,"__type__":"object"},"charge":0,"parity":null,"isotopeId":"C"},{"__type__":"Kekule.Atom","id":"a11","overrideRenderOptionItems":[],"coord2D":{"x":11.988622070312497,"y":36.45850912511088,"__type__":"object"},"charge":0,"parity":null,"isotopeId":"C"},{"__type__":"Kekule.Atom","id":"a14","overrideRenderOptionItems":[],"coord2D":{"x":13.9886220703125,"y":35.765688802083325,"__type__":"object"},"charge":0,"parity":null,"isotopeId":"C"},{"__type__":"Kekule.Atom","id":"a10","overrideRenderOptionItems":[],"coord2D":{"x":11.5886220703125,"y":35.76568880208333,"__type__":"object"},"charge":0,"parity":null,"isotopeId":"C"}],"anchorNodes":[],"connectors":[{"__type__":"Kekule.Bond","id":"b9","overrideRenderOptionItems":[],"parity":null,"bondType":"covalent","bondOrder":1,"electronCount":2,"isInAromaticRing":false,"connectedNodes":[0,1]},{"__type__":"Kekule.Bond","id":"b8","overrideRenderOptionItems":[],"parity":1,"bondType":"covalent","bondOrder":2,"electronCount":4,"isInAromaticRing":false,"connectedNodes":[0,2]},{"__type__":"Kekule.Bond","id":"b10","overrideRenderOptionItems":[],"parity":null,"bondType":"covalent","bondOrder":1,"electronCount":2,"isInAromaticRing":false,"connectedNodes":[1,3]},{"__type__":"Kekule.Bond","id":"b7","overrideRenderOptionItems":[],"parity":null,"bondType":"covalent","bondOrder":1,"electronCount":2,"isInAromaticRing":false,"connectedNodes":[2,4]}],"__type__":"Kekule.StructureConnectionTable"},"__type__":"Kekule.Molecule"}
     </script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
+    
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-analytics.js"></script>
 
   </head>
 
-  <body id="page-top" onload="init()">
+  <body id="page-top" onload="init()" class="fixed-nav">
 
-    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+    <nav class="navbar navbar-expand navbar-dark bg-dark fixed-top">
 
       <a class="navbar-brand mr-1" href="periodicTable.html">Chem</a>
 
@@ -166,7 +172,7 @@
             <li class="breadcrumb-item">
               <a href="#">Dashboard</a>
             </li>
-            <li class="breadcrumb-item active">reaction excersise</li>
+            <li class="breadcrumb-item active">Reaction excersise</li>
           </ol>
 
           <p>Fill product of each reaction. You can click on the blank and then use edit button to input product structures.</p>
@@ -290,11 +296,24 @@
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="index.html">Logout</a>
+            <a class="btn btn-primary" onclick="logout()">Logout</a>
           </div>
         </div>
       </div>
     </div>
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-firestore.js"></script>
+  
+    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-analytics.js"></script>
+  
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+    
+    <script src="./js/firebase-init.js"></script>
+    <!-- <script src="./js/login.js"></script>
+    <script src="./js/auth.js"></script> -->
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -302,9 +321,6 @@
 
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Page level plugin JavaScript-->
-    <script src="vendor/chart.js/Chart.min.js"></script>
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
