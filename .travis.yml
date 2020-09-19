@@ -1,11 +1,9 @@
-sudo:          false
-language:      node_js
-node_js:
-  - "node"
-install:       npm install
+sudo: required
+language: node_js
+
+node_js: node
+
+dist: trusty
+
 script:
-  - npm test
-  - gulp
-cache:
-  directories:
-    - node_modules
+  - yarn install
